@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Sanborns{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+{% block body %}
+<!-- {% include 'includes/pages_menu.html' %} -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <span class="navbar-brand" href="#"><i>Administrar</i></span>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nep" aria-controls="nep" aria-expanded="false">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="nep">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('.add_sanborns') }}">Crear registro</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('.feed_sanborns') }}">Fedd RSS</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <!-- {% for message in get_flashed_messages() %} -->
+  <div class="alert alert-success">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    {{ message }}
+  </div>
+  <!-- {% endfor %} -->
+  <div class="row">
+    <!-- Sidebar menu -->
+    {% include 'includes/sidebar.html' %}
+    
+    <!-- Body content -->
+    <div class="col col-md-9 mt-2">
+      <h2>Sanborns</h2>
+      <p class="text-left">{{ count }} de {{ count }} Registros</p>
+      {% for article in articles|reverse %}
+      <div class="row mb-3">
+        <img src="{{ article.image }}" class="rounded float-left" alt="..." width="80px">
+        <div class="col-md-9">
+          <strong class="text-left">{{ article.title }}</strong>
+          <a href="{{ article.url }}"><p>Ver producto</p></a>
+          <a href="{{ url_for('.sanborns_edit', id=article.id) }}">Editar</a>
+        | <a href="{{ url_for('.sanborns_delete', id=article.id) }}">Borrar</a>
+        </div>
+      </div>
+      {% endfor %}
+  </div>
+</div>
+</div>
+{% endblock %}

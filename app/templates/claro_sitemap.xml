@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:g="http://base.google.com/ns/1.0" version="2.0">
+    <channel>
+        <title>Encuentra todos tus productos</title>
+        <link>https://claroshop.com/</link>
+        <description>Una tienda para todos</description>
+        <language>es</language>
+        {% for article in articles %}
+        <item>
+            <title>{{article.title}}</title>
+            <link>{{article.url}}</link>
+            <g:image_link>{{article.image}}</g:image_link>
+        </item>
+    {% endfor %}
+    </channel>
+</rss>

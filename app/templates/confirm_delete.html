@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Claroshop{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+{% block body %}
+{% include 'includes/pages_menu.html'%}
+<main role="main">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-md-9 mx-auto">
+        <div>
+            <form action="{{ url_for('.delete_claroshop', id=article.id) }}" method="post">
+                <p>¿Estás seguro de que quieres borrar <strong> {{article.title}} </strong> ?</p>
+                <input type="submit" class="btn btn-danger btn-block" value="Borrar" />
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

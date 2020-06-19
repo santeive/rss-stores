@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+{% block body %}
+{% if current_user.is_authenticated %}
+  <div class="container">
+    <div class="row">
+      <!-- Side bar menu -->
+      {% include 'includes/sidebar.html' %}
+      <!-- Body content -->
+      <div class="col col-md-9 mt-5 text-center">
+        <h1 class="jumbotron-heading">RSS FEED</h1>
+        <p class="lead text-muted mb-5">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>        
+        <div class="table mt-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Tienda</th>
+                <th scope="col">Artículos</th>
+                <th scope="col">RSS Feed</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Claroshop</th>
+                <td>{{claro}}</td>
+                <td><a href="{{ url_for('.feed_claroshop') }}">Consultar Feed</a><td>
+              </tr>
+              <tr>
+                <th scope="row">Sanborns</th>
+                <td>{{sanborns}}</td>
+                <td><a href="{{ url_for('.feed_sanborns') }}">Consultar Feed</a><td>
+              </tr>
+              <tr>
+                <th scope="row">Sears</th>
+                <td>{{sears}}</td>
+                <td><a href="{{ url_for('.feed_sears') }}">Consultar Feed</a><td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>      
+{% else %}
+  <div class="container">
+    <div class="row">
+      <!-- Body content -->
+      <div class="col col-md-12 mt-5 text-center">
+        <h1 class="jumbotron-heading">RSS FEED</h1>
+        <p class="lead text-muted mb-5">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
+      </div>
+    </div>
+    <div class="row text-center">
+      <div class="col col-md-4">
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="{{ url_for('static', filename='img/placeholder.png') }}" alt="Logo claroshop" width="300px">
+          <div class="card-body">
+            <h5 class="card-title">Claroshop</h5>
+            <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+            <a href="{{ url_for('.feed_claroshop') }}" class="btn btn-danger">RSS Feed</a>
+          </div>
+        </div>
+      </div>
+      <div class="col col-md-4">
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="{{ url_for('static', filename='img/placeholder.png') }}" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Sanborns</h5>
+            <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+            <a href="{{ url_for('.feed_sanborns') }}" class="btn btn-danger">RSS Feed</a>
+          </div>
+        </div>
+      </div>
+      <div class="col col-md-4">
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="{{ url_for('static', filename='img/placeholder.png') }}" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Sears</h5>
+            <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+            <a href="{{ url_for('.feed_sears') }}" class="btn btn-danger">RSS Feed</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Actualizar Registro | Claroshop{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+{% block body %}
+{% include 'includes/pages_menu.html' %}
+<div class="container">
+  <div class="row">
+    <!-- Sidebar menu -->
+    {% include 'includes/sidebar.html' %}
+    <div class="col col-md-8 mt-2">
+        <h3>Claroshop</h3>
+        <h4>Actualizar registro</h4>
+        {{ wtf.quick_form(form) }}
+    </div>
+  </div>
+</div>
+{% endblock %}

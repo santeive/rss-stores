@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Registrar{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+  {% for message in get_flashed_messages() %}
+  <div class="alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    {{ message }}
+  </div>
+  {% endfor %}
+
+  <div class="row">
+    <!-- Sidebar menu -->
+    <div class="col col-md-9 ">
+      {{ wtf.quick_form(form) }}
+    </div>
+  </div>
+</div>
+{% endblock %}

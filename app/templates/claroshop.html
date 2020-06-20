@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
 
 {% block title %}Claroshop{% endblock %}
 {% block head %}
@@ -25,7 +26,6 @@
     </div>
   </div>
 </nav>
-
 <div class="container">
   {% for message in get_flashed_messages() %}
   <div class="alert alert-success">
@@ -35,24 +35,33 @@
   {% endfor %}
   <div class="row">
     <!-- Sidebar menu -->
-    {% include 'includes/sidebar.html' %}
-    
+    {% include 'includes/sidebar.html' %}   
     <!-- Body content -->
     <div class="col col-md-9 mt-2">
       <h2>Claroshop</h2>
-      <p class="text-left">{{ count }} de {{ count }} Records</p>
-      {% for article in articles|reverse %}
-      <div class="row mb-3">
+      <p class="text-left">{{ showed }} de {{ total }} Registros</p>
+      {% for article in articles %}
+      <div class="row mb-4">
         <img src="{{ article.image }}" class="rounded float-left" alt="..." width="80px">
-        <div class="col-md-9">
+        <div class="col-9 col-md-9">
           <strong class="text-left">{{ article.title }}</strong>
-          <a href="{{ article.url }}"><p>See product</p></a>
-          <a href="{{ url_for('.claroshop_edit', id=article.id) }}">Edit</a>
-        | <a href="{{ url_for('.delete_claroshop', id=article.id) }}">Delete</a>
+          <a href="{{ article.url }}"><p>Ver producto</p></a>
+          <a href="{{ url_for('.claroshop_edit', id=article.id) }}">Editar</a>
+        | <a href="{{ url_for('.delete_claroshop', id=article.id) }}">Borrar</a>
         </div>
       </div>
       {% endfor %}
+      <div class="row align-items-center mt-4">
+        {% if pagination %}
+        <div class="col-12 col-12 d-flex justify-content-center">
+          <div class="pagination">
+            {{ macros.pagination_widget(pagination, '.claroshop') }}
+          </div>
+        </div>
+        {% endif %}
+    </div>
   </div>
-</div>
-</div>
+  </div>
+
 {% endblock %}
+

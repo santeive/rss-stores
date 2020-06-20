@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
 
 {% block title %}Sanborns{% endblock %}
 {% block head %}
@@ -39,13 +40,13 @@
     {% include 'includes/sidebar.html' %}
 
     <!-- Body content -->
-    <div class="col col-md-6 mt-2">
+    <div class="col col-md-9 mt-2">
       <h2>Sears</h2>
-      <p class="text-left">{{ count }} de {{ count }} Registros</p>
-      {% for article in articles|reverse %}
-      <div class="row mb-3">
+      <p class="text-left">{{ showed }} de {{ total }} Registros</p>
+      {% for article in articles %}
+      <div class="row mb-4">
         <img src="{{ article.image }}" class="rounded float-left" alt="..." width="80px">
-        <div class="col-md-9">
+        <div class="col-9 col-md-9">
           <strong class="text-left">{{ article.title }}</strong>
           <a href="{{ article.url }}"><p>Ver producto</p></a>
           <a href="{{ url_for('.sears_edit', id=article.id) }}">Editar</a>
@@ -53,7 +54,15 @@
         </div>
       </div>
       {% endfor %}
-
+      <div class="row align-items-center mt-4">
+        {% if pagination %}
+        <div class="col-12 col-12 d-flex justify-content-center">
+          <div class="pagination">
+            {{ macros.pagination_widget(pagination, '.sanborns') }}
+          </div>
+        </div>
+        {% endif %}
+      </div>
     </div>
 
   </div>

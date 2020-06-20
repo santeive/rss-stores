@@ -1,12 +1,10 @@
-from flask import render_template, flash, session, redirect, url_for, request, make_response, json
+from flask import render_template, flash, session, redirect, url_for, request, make_response, json, current_app
 from flask_login import logout_user, login_required, login_user
 from .forms import ArticleForm, ArticleFormUpdate, ArticleFormDelete
 from ..models import User, Article, Store
 from datetime import datetime
 from . import main
 from .. import db
-
-# https://stackoverflow.com/questions/15727155/how-to-paginate-in-flask-sqlalchemy-for-db-session-joined-queries
 
 @main.route('/')
 def index():
@@ -19,23 +17,47 @@ def index():
 @login_required
 def claroshop():
     articles = Article.query.filter_by(store_id = 1).all()
-    # articles = articles.paginate(per_page=3, page=page_num, error_out=True)
-    count = len(articles)
-    return render_template('claroshop.html', articles=articles, count=count)
+    total = len(articles)
+
+    page = request.args.get('page', 1, type=int)
+    pagination = Article.query.filter_by(store_id = 1)\
+    .order_by(Article.timestamp.desc())\
+    .paginate(page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'], error_out=False)
+    articles = pagination.items
+    
+    showed = len(articles)
+    
+    return render_template('claroshop.html', articles=articles, showed=showed, total=total, pagination=pagination)
 
 @main.route('/sanborns')
 @login_required
 def sanborns():
     articles = Article.query.filter_by(store_id = 2).all()
-    count = len(articles)
-    return render_template('sanborns.html', articles=articles, count=count)
+    total = len(articles)
+
+    page = request.args.get('page', 1, type=int)
+    pagination = Article.query.filter_by(store_id = 2)\
+        .order_by(Article.timestamp.desc())\
+            .paginate(page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'], error_out=False)
+    articles = pagination.items
+    showed = len(articles)
+
+    return render_template('sanborns.html',  articles=articles, showed=showed, total=total, pagination=pagination)
 
 @main.route('/sears')
 @login_required
 def sears():
     articles = Article.query.filter_by(store_id = 3).all()
-    count = len(articles)
-    return render_template('sears.html', articles=articles, count=count)
+    total = len(articles)
+
+    page = request.args.get('page', 1, type=int)
+    pagination = Article.query.filter_by(store_id = 3)\
+        .order_by(Article.timestamp.desc())\
+            .paginate(page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'], error_out=False)
+    articles = pagination.items
+    showed = len(articles)
+
+    return render_template('sears.html', articles=articles, showed=showed, total=total, pagination=pagination)
 
 ## Add article section
 @main.route('/add/claroshop', methods=['GET', 'POST'])

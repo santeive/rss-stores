@@ -4,8 +4,7 @@
       <a class="navbar-brand" href="/">RSS | Feed</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ned" aria-controls="ned" aria-expanded="false">
         <span class="navbar-toggler-icon"></span>
-      </button>
-      
+      </button>  
       <div class="collapse navbar-collapse" id="ned">
         <ul class="navbar-nav mr-auto">
         </ul>
@@ -15,14 +14,14 @@
             <a class="nav-link"> Hola <strong>{{current_user.username.title()}}</strong></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('auth.logout') }}">Log out</a>
+            <a class="nav-link" href="{{ url_for('auth.logout') }}">Salir</a>
           </li>
           {% else %}
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('auth.login') }}">Log in</a>
+            <a class="nav-link" href="{{ url_for('auth.login') }}">Ingresar</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
+            <a class="nav-link" href="{{ url_for('auth.register') }}">Registrarse</a>
           </li>
           {% endif %}
         </ul>

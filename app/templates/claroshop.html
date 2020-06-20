@@ -1,13 +1,12 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% block title %}Store One{% endblock %}
+{% block title %}Claroshop{% endblock %}
 {% block head %}
   {{ super() }}
 {% endblock %}
 
 {% block body %}
-<!-- {% include 'includes/pages_menu.html' %} -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
     <span class="navbar-brand" href="#"><i>Administrar</i></span>
@@ -40,7 +39,7 @@
     
     <!-- Body content -->
     <div class="col col-md-9 mt-2">
-      <h2>Store One</h2>
+      <h2>Claroshop</h2>
       <p class="text-left">{{ count }} de {{ count }} Records</p>
       {% for article in articles|reverse %}
       <div class="row mb-3">
